@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [count,setCount] = useState(0)
+  const handleAdd = () => {
+    setCount(pre=>pre+1)
+  }
   return (
     <div style = {{padding: 20}}className="App">
-      <h1>Hello anh em </h1>
-      <h1>Tôi là Khiêm Hôm nay là ngày tôi bắt đầu làm dự án React</h1>
+      <h1>{count} </h1>
+      <button onClick={handleAdd}>+</button>
       <h1>HAHAHAHAHAHH</h1>
     </div>
   );
