@@ -2,11 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: transparent;
 }
 .container {
     width: 1150px;
-    background-color: skyblue;
     display: flex;
+    padding: 0 24px;
 }
 .content {
     flex: 1;

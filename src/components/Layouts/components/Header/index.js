@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-import Tippy from '@tippyjs/react/headless';
+import HeadlessTippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
@@ -11,6 +13,12 @@ import {
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
+    faCloudUpload,
+    faCoins,
+    faGear,
+    faUser,
+    faSignOut,
+    faMessage,
 } from '@fortawesome/free-solid-svg-icons';
 import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
@@ -32,29 +40,38 @@ function Header() {
         {
             name: 'sontungmtp',
             username: 'SonTungMTP',
-            avatar: 'https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/115cca71265c94522079ac7e93a0274b.jpeg?x-expires=1665676800&x-signature=HU1ygvsyNIVAkTijLWjHZP0qPtI%3D',
+            avatar: 'https://static-images.vnncdn.net/files/publish/ca-si-son-tung-m-tp-4aee32b7df234d3c86807cad722a7c4b.jpg',
         },
         {
             name: 'sia_jiwoo',
             username: 'Sia_JIwwoo',
-            avatar: 'https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/88c05c61fd29e6eec1fa0682c7ba26c9.jpeg?x-expires=1665763200&x-signature=gKa2ZzZQlpYssmaUNEMpoGdB6Gw%3D',
+            avatar: 'https://cdn.phunuvagiadinh.vn/thanhtruc_btv/auto/14_4_2022/si1-2022-04-14-15-16.jpg',
         },
         {
             name: 'sammy_daoo22',
             username: 'SammyDao',
-            avatar: 'https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/f0ddf05770a5b5a0b8a0d98fc17b27ee.jpeg?x-expires=1665763200&x-signature=5V20iitKr6qtZqwiCU5pxJyeUgA%3D',
+            avatar: 'https://newsmd2fr.keeng.net/tiin/archive/imageslead/2022/03/25/90_d29466a63515249b97e4caa80f3bc4b5.jpg',
         },
         {
             name: 'kienreview90',
             username: 'KienReview',
-            avatar: 'https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/b9feca543a0a96156cd995c0f3f2a1cb~c5_100x100.jpeg?x-expires=1665763200&x-signature=Zf3DywEf4BuhCLNJiIsAI04N4Dg%3D',
+            avatar: 'https://hocnhanh.vn/wp-content/uploads/2022/08/kien-review-chuyen-review-do-shopee.jpg',
         },
     ];
+
+    const currentUser = true;
 
     const MENU_ITEMS = [
         {
             icon: <FontAwesomeIcon icon={faEarthAsia} />,
             title: 'English',
+            children: {
+                title: 'language',
+                data: [
+                    { code: 'en', title: 'English' },
+                    { code: 'vi', title: 'Tiếng Việt' },
+                ],
+            },
         },
         {
             icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -66,15 +83,50 @@ function Header() {
             title: 'Keyboard shortcuts',
         },
     ];
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View profile',
+            to: '/@hoaa',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Settings',
+            to: '/settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
+
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language':
+                // Handle change language
+                break;
+            default:
+        }
+    };
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {/* logo */}
                 <img src={images.logo} alt="tiktok" />
                 {/* search-area */}
-                <Tippy
+                <HeadlessTippy
                     interactive
-                    visible={searchResult.length > 0}
+                    // visible={searchResult.length > 0}
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <PopperWrapper>
@@ -96,15 +148,44 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </button>
                     </div>
-                </Tippy>
+                </HeadlessTippy>
                 {/* actions */}
                 <div className={cx('actions')}>
-                    <Button text>Upload</Button>
-                    <Button primary>Log in</Button>
-                    <Menu items={MENU_ITEMS}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                    {currentUser ? (
+                        <>
+                            <Button outline>+ Tải lên</Button>
+                            <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 200]} content="Tin nhắn" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faMessage} />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button text>Upload</Button>
+                            <Button primary>Log in</Button>
+                        </>
+                    )}
+
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <img
+                                src="https://phunugioi.com/wp-content/uploads/2021/11/hinh-nen-obito-dep-ngau-nhat.jpg"
+                                className={cx('avatar')}
+                                alt="Obito"
+                            />
+                        ) : (
+                            <>
+                                <button className={cx('more-btn')}>
+                                    <FontAwesomeIcon icon={faEllipsisVertical} />
+                                </button>
+                            </>
+                        )}
                     </Menu>
                 </div>
             </div>
