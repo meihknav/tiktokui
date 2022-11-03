@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tiktokui/static/css/main.24ae9b99.css",
-    "main.js": "/tiktokui/static/js/main.47e05063.js",
+    "main.js": "/tiktokui/static/js/main.cd8b518e.js",
     "static/js/787.b0f0e48b.chunk.js": "/tiktokui/static/js/787.b0f0e48b.chunk.js",
     "static/media/ProximaNova-Semibold.woff2": "/tiktokui/static/media/ProximaNova-Semibold.db7972dbe0b808f96bae.woff2",
     "static/media/sofiapro-bold.woff": "/tiktokui/static/media/sofiapro-bold.086ed00f3060992f2938.woff",
@@ -10,11 +10,11 @@
     "static/media/logo.svg": "/tiktokui/static/media/logo.945ae7050205d27aed8af8d4d9630dcb.svg",
     "index.html": "/tiktokui/index.html",
     "main.24ae9b99.css.map": "/tiktokui/static/css/main.24ae9b99.css.map",
-    "main.47e05063.js.map": "/tiktokui/static/js/main.47e05063.js.map",
+    "main.cd8b518e.js.map": "/tiktokui/static/js/main.cd8b518e.js.map",
     "787.b0f0e48b.chunk.js.map": "/tiktokui/static/js/787.b0f0e48b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.24ae9b99.css",
-    "static/js/main.47e05063.js"
+    "static/js/main.cd8b518e.js"
   ]
 }
