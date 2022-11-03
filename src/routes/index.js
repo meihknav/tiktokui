@@ -6,7 +6,7 @@ import Search from '~/pages/Search';
 
 // route public
 const publicRoutes = [
-    { path: '/', component: Home },
+    { path: '/tiktokui', component: Home },
     { path: '/following', component: Following },
     { path: '/@:nickname', component: Profile },
     { path: '/upload', component: Upload, layout: 'HeaderOnly' },
