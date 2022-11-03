@@ -6,11 +6,11 @@ import Search from '~/pages/Search';
 
 // route public
 const publicRoutes = [
-    { path: '/tiktokui', component: Home },
-    { path: '/tiktokui/following', component: Following },
-    { path: '/tiktokui/profile', component: Profile },
-    { path: '/tiktokui/upload', component: Upload, layout: 'HeaderOnly' },
-    { path: '/tiktokui/search', component: Search, layout: null },
+    { path: '/', component: Home },
+    { path: '/following', component: Following },
+    { path: '/@:nickname', component: Profile },
+    { path: '/upload', component: Upload, layout: 'HeaderOnly' },
+    { path: '/search', component: Search, layout: null },
 ];
 
 const privateRoutes = [];

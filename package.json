@@ -1,6 +1,5 @@
 {
     "name": "tiktokclone",
-    "homepage": "https://meihknav.github.io/tiktokui",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

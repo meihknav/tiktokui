@@ -1,64 +1,29 @@
-import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
-import HeadlessTippy from '@tippyjs/react/headless';
+
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark,
-    faMagnifyingGlass,
-    faSpinner,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faCloudUpload,
     faCoins,
     faGear,
     faUser,
     faSignOut,
-    faMessage,
 } from '@fortawesome/free-solid-svg-icons';
 import images from '~/assets/images';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccountItem from '~/components/AccountItem';
+
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import { MailBoxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
+import Search from '../Search';
 
 const cx = classNames.bind(styles);
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 0);
-    }, []);
-
-    const accounts = [
-        {
-            name: 'sontungmtp',
-            username: 'SonTungMTP',
-            avatar: 'https://static-images.vnncdn.net/files/publish/ca-si-son-tung-m-tp-4aee32b7df234d3c86807cad722a7c4b.jpg',
-        },
-        {
-            name: 'sia_jiwoo',
-            username: 'Sia_JIwwoo',
-            avatar: 'https://cdn.phunuvagiadinh.vn/thanhtruc_btv/auto/14_4_2022/si1-2022-04-14-15-16.jpg',
-        },
-        {
-            name: 'sammy_daoo22',
-            username: 'SammyDao',
-            avatar: 'https://newsmd2fr.keeng.net/tiin/archive/imageslead/2022/03/25/90_d29466a63515249b97e4caa80f3bc4b5.jpg',
-        },
-        {
-            name: 'kienreview90',
-            username: 'KienReview',
-            avatar: 'https://hocnhanh.vn/wp-content/uploads/2022/08/kien-review-chuyen-review-do-shopee.jpg',
-        },
-    ];
-
     const currentUser = true;
 
     const MENU_ITEMS = [
@@ -124,44 +89,27 @@ function Header() {
                 {/* logo */}
                 <img src={images.logo} alt="tiktok" />
                 {/* search-area */}
-                <HeadlessTippy
-                    interactive
-                    // visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}> Tài khoản</h4>
-                                {accounts.map((account, index) => (
-                                    <AccountItem account={account} key={index} />
-                                ))}
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input placeholder="Tìm tài khoản và video" spellCheck={false} />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                <Search />
                 {/* actions */}
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Button outline>+ Tải lên</Button>
                             <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon className="uploadicon" />
                                 </button>
                             </Tippy>
+
                             <Tippy delay={[0, 200]} content="Tin nhắn" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faMessage} />
+                                    <MessageIcon className="messageicon" />
+                                    <span className={cx('bagde')}>12</span>
+                                </button>
+                            </Tippy>
+
+                            <Tippy delay={[0, 200]} content="Hộp thư" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <MailBoxIcon className="mailboxicon" />
                                 </button>
                             </Tippy>
                         </>
@@ -174,10 +122,10 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
-                                src="https://phunugioi.com/wp-content/uploads/2021/11/hinh-nen-obito-dep-ngau-nhat.jpg"
-                                className={cx('avatar')}
-                                alt="Obito"
+                            <Image
+                                className={cx('user-avatar')}
+                                alt="Nguyen Van A"
+                                // fallback="https://blog.logrocket.com/wp-content/uploads/2020/07/react-native-geolocation.png"
                             />
                         ) : (
                             <>
